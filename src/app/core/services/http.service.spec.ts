@@ -2,17 +2,17 @@
 
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed, async, inject } from '@angular/core/testing';
-import { EmployeeService } from './employee.service';
+import { HttpService } from './http.service';
 
-describe('Service: Employee', () => {
+describe('Service: Http', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports:[HttpClientModule],
-      providers: [EmployeeService]
+      providers: [HttpService]
     });
   });
 
-  it('should ...', inject([EmployeeService], (service: EmployeeService) => {
+  it('should ...', inject([HttpService], (service: HttpService) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { ListEmployeeComponent } from './list-employee.component';
+import { EmployeeService } from '../employee.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 describe('ListEmployeeComponent', () => {
   let component: ListEmployeeComponent;
@@ -11,7 +13,9 @@ describe('ListEmployeeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListEmployeeComponent ]
+      imports:[HttpClientModule],
+      declarations: [ ListEmployeeComponent ],
+      providers:[EmployeeService]
     })
     .compileComponents();
   }));
