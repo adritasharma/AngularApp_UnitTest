@@ -31,9 +31,7 @@ describe('Service: EmployeeService', () => {
   }));
 
   it('should return All Employees', () => {
-    service.getAllEmployees().subscribe(res =>{
-      expect(res[0].employeeId).toBe(99);
-    })
+    service.getAllEmployees().subscribe();
 
     const req = httpMock.expectOne(`${baseUrl}`);
     expect(req.request.method).toBe('GET');

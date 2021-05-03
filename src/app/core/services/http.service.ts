@@ -17,10 +17,6 @@ export class HttpService {
     return this._http.post(url, resource)
   }
 
-  fetch(url: string, resource) {
-    return this._http.post(url, resource)
-  }
-
   update(url: string, resource) {
     return this._http.put(url, resource)
   }
