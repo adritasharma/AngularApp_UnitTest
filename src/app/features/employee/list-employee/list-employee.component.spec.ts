@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ListEmployeeComponent } from './list-employee.component';
 import { EmployeeService } from '../employee.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('ListEmployeeComponent', () => {
   let component: ListEmployeeComponent;
@@ -45,5 +45,19 @@ describe('ListEmployeeComponent', () => {
 
     expect(mockEmployeeService.getAllEmployees).toHaveBeenCalled();
     expect(component.employees.length).toBe(3);
+  });
+  it('should set employees empty on service error', () => {
+    mockEmployeeService.getAllEmployees.and.returnValue(throwError({status: 500}));
+    fixture.detectChanges();
+
+    expect(mockEmployeeService.getAllEmployees).toHaveBeenCalled();
+    expect(component.employees.length).toBe(0);
+  });
+  it('should set employees empty on no data', () => {
+    mockEmployeeService.getAllEmployees.and.returnValue(of(null));
+    fixture.detectChanges();
+
+    expect(mockEmployeeService.getAllEmployees).toHaveBeenCalled();
+    expect(component.employees.length).toBe(0);
   });
 });
