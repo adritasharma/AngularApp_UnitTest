@@ -5,6 +5,7 @@ import { ListEmployeeComponent } from './list-employee.component';
 import { EmployeeService } from '../employee.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError } from 'rxjs';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('ListEmployeeComponent', () => {
   let component: ListEmployeeComponent;
@@ -22,7 +23,7 @@ describe('ListEmployeeComponent', () => {
     mockEmployeeService = jasmine.createSpyObj(['getAllEmployees'])
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, SharedModule],
       declarations: [ListEmployeeComponent],
       providers: [
         { provide: EmployeeService, useValue: mockEmployeeService }
