@@ -60,5 +60,6 @@ describe('Service: HttpService', () => {
  
     const req = httpMock.expectOne(`${baseUrl}`);
     expect(req.request.method).toBe('GET');
+    expect(req.request.responseType).toBe('blob');
   });
 });

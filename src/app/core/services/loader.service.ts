@@ -8,9 +8,9 @@ export class LoaderService {
 
 constructor() { }
 
-public status: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+public status$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     display(value: boolean) {
-        this.status.next(value);
+        this.status$.next(value);
     }
 }
