@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListEmployeeComponent } from './list-employee/list-employee.component';
 import { SaveEmployeeComponent } from './save-employee/save-employee.component';
+import { ViewEmployeeComponent } from './view-employee/view-employee.component';
 
 
 const routes: Routes = [
     { path: 'index', component: ListEmployeeComponent },
     { path: 'save', component: SaveEmployeeComponent },
-    { path: 'save/:id', component: SaveEmployeeComponent }
+    { path: 'save/:id', component: SaveEmployeeComponent },
+    { path: 'view/:id', component: ViewEmployeeComponent }
 ];
 
 @NgModule({

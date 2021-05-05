@@ -5,6 +5,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Expereience</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +14,9 @@
       <td>{{emp.fullName}}</td>
       <td>{{emp.email}}</td>
       <td>{{emp.doj | age}}</td>
+      <td>
+        <a class="links" routerLink="../view/{{emp.employeeId}}">View</a>
+      </td>
     </tr>
   </tbody>
 </table>

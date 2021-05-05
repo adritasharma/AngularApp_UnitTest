@@ -1,0 +1,6 @@
+<table class="table table-bordered" >
+    <tr *ngFor="let emp of employeeDetail | keyvalue">
+      <td>{{emp.key | titlecase}}</td>
+      <td>{{emp.value }}</td>
+    </tr>
+</table>

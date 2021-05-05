@@ -22,5 +22,9 @@ export class EmployeeService extends HttpService {
     return this.get(`${this.baseUrl}`)
   }
 
+  getEmployeeDetail(employeeId): Observable<IEmployee> {
+    return this.get(`${this.baseUrl}/${employeeId}`)
+  }
+
 
 }
