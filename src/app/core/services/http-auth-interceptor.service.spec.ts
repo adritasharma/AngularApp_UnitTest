@@ -2,12 +2,10 @@
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed, async, inject } from '@angular/core/testing';
-import { of, throwError } from 'rxjs';
+import { TestBed,  inject } from '@angular/core/testing';
 import { environment } from 'src/environments/environment';
 import { HttpAuthInterceptorService } from './http-auth-interceptor.service';
 import { HttpService } from './http.service';
-import { LoaderService } from './loader.service';
 
 describe('Service: HttpAuthInterceptor', () => {
 
@@ -24,7 +22,6 @@ describe('Service: HttpAuthInterceptor', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        // { provide: HttpService, useValue: mockHttpService },
         HttpService,
         {
           provide: HTTP_INTERCEPTORS,
@@ -44,8 +41,6 @@ describe('Service: HttpAuthInterceptor', () => {
 
   it('should add an Authorization header', () => {
     httpService.get(baseUrl).subscribe();
-    // mockHttpService.get(baseUrl).and.returnValue(of({status:true}));
-
     const httpRequest = httpMock.expectOne(`${baseUrl}`);
     expect(httpRequest.request.headers.has('Authorization')).toEqual(true);
   });
