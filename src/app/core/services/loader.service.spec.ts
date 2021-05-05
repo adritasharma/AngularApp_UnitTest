@@ -20,6 +20,12 @@ describe('Service: LoaderService', () => {
     expect(service).toBeTruthy();
   }));
 
+  it('should check loader status false by default', () => {
+    service.status$.subscribe((message) => {
+      expect(message).toBe(false);
+    })
+  })
+
   it('should change loader status', () => {
     service.display(true);
 
