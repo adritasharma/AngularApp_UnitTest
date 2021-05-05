@@ -1,8 +1,8 @@
 /* tslint:disable:no-unused-variable */
 
 import { HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed, async, inject } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { HttpErrorInterceptorService } from './error-interceptor.service';
 import { HttpService } from './http.service';
@@ -58,17 +58,16 @@ describe('Service: ErrorInterceptor', () => {
 
   })
 
-  it('should pass sucess request', () => {
+  it('should pass success request', () => {
 
-
-    httpHandlerSpy.handle.and.returnValue(of(new HttpResponse({ status: 200 })));
+    httpHandlerSpy.handle.and.returnValue(of(new HttpResponse({ status: 200, body: { test: "test" } })));
 
     httpErrorInterceptor.intercept(mockHttpService, httpHandlerSpy)
       .subscribe(
-        result => console.log('good', result),
+        result => {
+          expect(result.body.test).toEqual('test');
+        },
         err => {
-          console.log('error', err);
-          expect(err.error.message).toEqual('test-error');
         }
       );
 
