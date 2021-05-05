@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/core/services/http.service';
+import { IEmployee } from 'src/app/shared/models/IEmployee';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -17,7 +18,7 @@ export class EmployeeService extends HttpService {
   }
 
 
-  getAllEmployees(): Observable<any> {
+  getAllEmployees(): Observable<IEmployee[]> {
     return this.get(`${this.baseUrl}`)
   }
 
