@@ -1,1 +1,12 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+
+.action-cell {
+    text-align: center;
+}
+
+.action-icon{
+    padding: 0 0.4rem;
+}
+.delete-icon{
+    color: rgb(172, 5, 5);
+}

@@ -14,8 +14,8 @@
       <td>{{emp.fullName}}</td>
       <td>{{emp.email}}</td>
       <td>{{emp.doj | age}}</td>
-      <td>
-        <a class="links" routerLink="../view/{{emp.employeeId}}">View</a>
+      <td class="action-cell">
+        <list-action [paramId]="emp.employeeId" (onDelete)="deleteEmployee(emp.employeeId)"></list-action>
       </td>
     </tr>
   </tbody>

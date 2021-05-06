@@ -23,4 +23,8 @@ export class ListEmployeeComponent implements OnInit {
     })
   }
 
+  deleteEmployee(empId){
+    alert("delete: " + empId)
+  }
+
 }
