@@ -15,7 +15,7 @@ export class ViewEmployeeComponent implements OnInit {
   employeeDetail: IEmployee = null;
 
   ngOnInit() {
-    let employeeId = this.activatedRoute.snapshot.params['id']
+    let employeeId = this.activatedRoute.snapshot.paramMap.get('id')
     this.getEmployeeDetail(employeeId);
 
   }
@@ -28,4 +28,5 @@ export class ViewEmployeeComponent implements OnInit {
       }
     })
   }
+  
 }
