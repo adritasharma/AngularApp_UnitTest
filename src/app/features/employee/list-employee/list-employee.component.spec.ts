@@ -7,6 +7,9 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError } from 'rxjs';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ListActionComponent } from 'src/app/shared/components/list-action/list-action.component';
+import { By } from '@angular/platform-browser';
+
 describe('ListEmployeeComponent', () => {
   let component: ListEmployeeComponent;
   let fixture: ComponentFixture<ListEmployeeComponent>;
@@ -23,7 +26,7 @@ describe('ListEmployeeComponent', () => {
     mockEmployeeService = jasmine.createSpyObj(['getAllEmployees'])
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, SharedModule,RouterTestingModule],
+      imports: [HttpClientTestingModule, SharedModule, RouterTestingModule],
       declarations: [ListEmployeeComponent],
       providers: [
         { provide: EmployeeService, useValue: mockEmployeeService }
@@ -48,7 +51,7 @@ describe('ListEmployeeComponent', () => {
     expect(component.employees.length).toBe(3);
   });
   it('should set employees empty on service error', () => {
-    mockEmployeeService.getAllEmployees.and.returnValue(throwError({status: 500}));
+    mockEmployeeService.getAllEmployees.and.returnValue(throwError({ status: 500 }));
     fixture.detectChanges();
 
     expect(mockEmployeeService.getAllEmployees).toHaveBeenCalled();
@@ -63,8 +66,14 @@ describe('ListEmployeeComponent', () => {
   });
   it(`should call employeeService.deleteEmployee when list action Component's 
     delete button is clicked`, () => {
-      mockEmployeeService.getAllEmployees.and.returnValue(of(employeeSampleData));
-      fixture.detectChanges();
+    spyOn(fixture.componentInstance, 'deleteEmployee');
+    mockEmployeeService.getAllEmployees.and.returnValue(of(employeeSampleData));
+    fixture.detectChanges();
+
+    const actionComponents = fixture.debugElement.queryAll(By.directive(ListActionComponent));
+    actionComponents[0].query(By.css('#deleteAction')).triggerEventHandler('click', {});
+
+    expect(fixture.componentInstance.deleteEmployee).toHaveBeenCalledWith(employeeSampleData[0].employeeId)
 
   });
 });
