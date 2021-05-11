@@ -1,5 +1,5 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
@@ -11,9 +11,9 @@ describe('ListActionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListActionComponent ]
+      declarations: [ListActionComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -25,4 +25,24 @@ describe('ListActionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+  it('should listen for delete icon click', () => {
+    spyOn(component.onDelete, 'emit');
+    component.onDeleteClick();
+    fixture.detectChanges();
+
+    expect(component.onDelete.emit).toHaveBeenCalled();
+  });
+
+  // it('should check Delete Click', fakeAsync(() => {
+  //   spyOn(component, 'onDeleteClick');
+
+  //   let button = fixture.debugElement.nativeElement.querySelector('#deleteAction');
+  //   button.click();
+  //   tick();
+  //   expect(component.onDeleteClick).toHaveBeenCalled();
+  //   expect(component.onDelete.emit).toHaveBeenCalled()
+  // }));
+
 });

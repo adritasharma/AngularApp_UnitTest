@@ -21,7 +21,7 @@ export class HttpService {
     return this._http.put(url, resource)
   }
 
-  delete(url: string) {
+  delete(url: string): Observable<any> {
     return this._http.delete(url)
   }
 

@@ -6,7 +6,7 @@ import { EmployeeService } from '../employee.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError } from 'rxjs';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { RouterTestingModule } from '@angular/router/testing';
 describe('ListEmployeeComponent', () => {
   let component: ListEmployeeComponent;
   let fixture: ComponentFixture<ListEmployeeComponent>;
@@ -23,7 +23,7 @@ describe('ListEmployeeComponent', () => {
     mockEmployeeService = jasmine.createSpyObj(['getAllEmployees'])
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, SharedModule],
+      imports: [HttpClientTestingModule, SharedModule,RouterTestingModule],
       declarations: [ListEmployeeComponent],
       providers: [
         { provide: EmployeeService, useValue: mockEmployeeService }
@@ -60,5 +60,11 @@ describe('ListEmployeeComponent', () => {
 
     expect(mockEmployeeService.getAllEmployees).toHaveBeenCalled();
     expect(component.employees.length).toBe(0);
+  });
+  it(`should call employeeService.deleteEmployee when list action Component's 
+    delete button is clicked`, () => {
+      mockEmployeeService.getAllEmployees.and.returnValue(of(employeeSampleData));
+      fixture.detectChanges();
+
   });
 });

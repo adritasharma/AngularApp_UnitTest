@@ -16,9 +16,6 @@ describe('ViewEmployeeComponent', () => {
   let mockEmployeeService
   let employeeSampleData;
 
-  // beforeEach(async(() => {
-
-  // }));
 
   beforeEach(() => {
     employeeSampleData = { employeeId: 1, fullName: "Adrita Sharma" }
@@ -61,12 +58,5 @@ describe('ViewEmployeeComponent', () => {
     expect(component.employeeDetail.fullName).toBe(employeeSampleData.fullName);
   });
 
-  it('should set employee null on no data', () => {
-    mockEmployeeService.getEmployeeDetail.and.returnValue(of(null));
-    fixture.detectChanges();
-
-    expect(mockEmployeeService.getEmployeeDetail).toHaveBeenCalled();
-    expect(component.employeeDetail).toBe(null);
-  });
   
 });
