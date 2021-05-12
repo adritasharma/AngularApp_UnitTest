@@ -28,7 +28,7 @@ export class ListEmployeeComponent implements OnInit {
 
   deleteEmployee(empId) {
     this.employeeService.deleteEmployee(empId).subscribe(res => {
-      this.getAllEmployees();
+      this.employees.splice(this.employees.findIndex(x => x.employeeId == empId), 1)
     })
   }
 

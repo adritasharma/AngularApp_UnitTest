@@ -7,8 +7,8 @@ import { ViewEmployeeComponent } from './view-employee/view-employee.component';
 
 const routes: Routes = [
     { path: 'index', component: ListEmployeeComponent },
-    { path: 'save', component: SaveEmployeeComponent },
-    { path: 'save/:id', component: SaveEmployeeComponent },
+    { path: 'add', component: SaveEmployeeComponent },
+    { path: 'edit/:id', component: SaveEmployeeComponent },
     { path: 'view/:id', component: ViewEmployeeComponent }
 ];
 

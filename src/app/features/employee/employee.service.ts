@@ -25,10 +25,13 @@ export class EmployeeService extends HttpService {
   getEmployeeDetail(employeeId): Observable<IEmployee> {
     return this.get(`${this.baseUrl}/${employeeId}`)
   }
-
   
   deleteEmployee(employeeId): Observable<any> {
     return this.delete(`${this.baseUrl}/${employeeId}`)
+  }
+
+  addEmployee(employee:IEmployee): Observable<IEmployee> {
+    return this.post(`${this.baseUrl}`,employee)
   }
 
 

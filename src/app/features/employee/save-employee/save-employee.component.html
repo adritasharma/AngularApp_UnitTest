@@ -1,3 +1,23 @@
-<p>
-  save-employee works!
-</p>
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>First Name</label>
+    <input type="text" class="form-control" formControlName="firstName">
+  </div>
+  <div class="form-group">
+    <label>Last Name</label>
+    <input type="text" class="form-control" formControlName="lastName">
+  </div>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" class="form-control" formControlName="email">
+  </div>
+  <div class="form-group">
+    <label>Date of Birth</label>
+    <input type="date" class="form-control" formControlName="dob">
+  </div>
+  <div class="form-group">
+    <label>Date of Joining</label>
+    <input type="date" class="form-control" formControlName="doj">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
