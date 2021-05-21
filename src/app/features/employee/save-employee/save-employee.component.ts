@@ -1,8 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IEmployee } from 'src/app/shared/models/IEmployee';
 import { EmployeeService } from '../employee.service';
 
 @Component({
@@ -20,9 +19,9 @@ export class SaveEmployeeComponent implements OnInit {
   ngOnInit() {
 
     this.employeeForm = new FormGroup({
-      firstName: new FormControl(''),
+      firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl(''),
-      email: new FormControl(''),
+      email: new FormControl('', [Validators.required, Validators.email]),
       dob: new FormControl(null),
       doj: new FormControl(this.datePipe.transform(new Date(), 'yyyy-MM-dd')),
     });

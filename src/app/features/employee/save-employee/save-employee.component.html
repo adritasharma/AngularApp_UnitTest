@@ -19,5 +19,5 @@
     <label>Date of Joining</label>
     <input type="date" class="form-control" formControlName="doj">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!employeeForm.valid">Submit</button>
 </form>
