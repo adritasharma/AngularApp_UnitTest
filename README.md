@@ -1,31 +1,29 @@
-# AngularAppUnitTest
+**Angular unit testing**
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.10.
+Unit testing is a type of software testing where we test individual components of an application
 
-## Development server
+**Jasmine and Karma**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**Jasmine**: It is a testing framework for Javascript programming language that supports Behaviour Driven Development (BDD) software development practice.
+**Karma**: Karma is a tool of running tests on browsers it lets us spawn browsers and run jasmine tests inside of them.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**Spec**
 
-## Build
+**Spec** in Jasmine represents a test case inside the test suite. We can define spec by calling the global Jasmine function **it**, which, like **describe** takes a string and a function.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Example
+```
+describe("Suite Name", function() {
+    it("test spec", function() {
+        expect( expression ).toEqual(true);
+    }); 
+});
+```
 
-## Running unit tests
+**Mocking**
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+An object under test may have dependencies on other complex objects (dependencies). To isolate the behavior of the test object we replace the other objects (dependencies) by mocks that simulate the behavior of the real objects.
+In short, mocking is creating objects that simulate the behavior of real objects.
 
-## Running code coverage
 
-Run `ng test --no-watch --code-coverage`
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
