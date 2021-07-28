@@ -5,6 +5,7 @@ Unit testing is a type of software testing where we test individual components o
 ### Jasmine and Karma
 
 **Jasmine**: It is a testing framework for Javascript programming language that supports Behaviour Driven Development (BDD) software development practice.
+
 **Karma**: Karma is a tool of running tests on browsers it lets us spawn browsers and run jasmine tests inside of them.
 
 
@@ -12,7 +13,7 @@ Unit testing is a type of software testing where we test individual components o
 
 **TesSuite**: We use a **describe** to start our test block with the title matching the tested component name. `describe(string, function)` function defines what we call a **Test Suite**, a collection of individual Test Specs.
 
-**Spec** in Jasmine represents a test case inside the test suite. We can define spec by calling the global Jasmine function **it**, which, like **describe** takes a string and a function. `it(string, function)` function defines an individual Test Spec, this contains one or more Test Expectations
+**Spec** : It represents a test case inside the test suite. We can define spec by calling the global Jasmine function **it**, which, like `describe` takes a string and a function. `it(string, function)` function defines an individual Test Spec, this contains one or more Test Expectations
 
 Example
 ```
