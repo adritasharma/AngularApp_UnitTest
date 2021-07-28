@@ -8,6 +8,15 @@ Unit testing is a type of software testing where we test individual components o
 
 **Karma**: Karma is a tool of running tests on browsers it lets us spawn browsers and run jasmine tests inside of them.
 
+### TestBed
+
+The TestBed acts as a dummy Angular Module and we can configure it like one including with a set of imports,  providers etc:
+
+```
+TestBed.configureTestingModule({
+  providers: [AuthService]
+});
+```
 
 ### Test functions
 
@@ -15,9 +24,9 @@ Unit testing is a type of software testing where we test individual components o
 
 **Spec (it)** : It represents a test case inside the test suite. We can define spec by calling the global Jasmine function **it**, which, like `describe` takes a string and a function. `it(string, function)` function defines an individual Test Spec, this contains one or more Test Expectations.
 
-**Expected outcome expect()**: expect(actual) functions take a value, called an actual. An expect function is typically used alongside a matcher function. Together they return a boolean value that depicts the passing or failing of a spec.
+**Expected outcome expect()**: `expect(actual)` functions take a value, called an actual. An expect function is typically used alongside a matcher function. Together they return a boolean value that depicts the passing or failing of a spec.
 
-**Matcher** : Matcher functions take a value that represents the expected value. A matcher function is chained alongside an expect function. Together they return a boolean value that depicts the passing or failing of a spec. Some examples of matchers are toBeTruthy(), toEqual(), and toContain().
+**Matcher** : Matcher functions take a value that represents the expected value. A matcher function is chained alongside an expect function. Together they return a boolean value that depicts the passing or failing of a spec. Some examples of matchers are `toBeTruthy()`, `toEqual()`, and `toContain()`.
 
 Example
 ```
