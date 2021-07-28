@@ -47,16 +47,34 @@ describe("Suite Name", function() {
 
 **afterEach**: This function is called after each test specification has been run.
 
-### Important terminologies
-
-**Mocking**
+### Mocking
 
 An object under test may have dependencies on other complex objects (dependencies). To isolate the behavior of the test object we replace the other objects (dependencies) by mocks that simulate the behavior of the real objects.
 In short, mocking is creating objects that simulate the behavior of real objects.
 
-**async**
+**Mocking with Spies**
 
-The purpose of the async is to let all the possible asynchronous code to finish before continuing.
+A Spy is a feature of Jasmine which lets you take an existing class, function, or object and mock it in such a way that you can control what gets returned from function calls.
+
+
+### Testing Asynchronous Code
+
+**async** : The purpose of the async is to let all the possible asynchronous code to finish before continuing.
+
+**async and whenStable** 
+
+We wrap our test spec function in another function called async.
+We place the tests we need to run after the isAuthenticated promise resolves inside this function.
+This async function executes the code inside its body in a special async test zone. This intercepts and keeps track of all promises created in its body.
+
+Only when all of those pending promises have been resolved does it then resolves the promise returned from whenStable.
+
+**fakeAsync and tick**
+
+Like async we wrap the test spec function in a function called fakeAsync.
+We call tick() when there are pending asynchronous activities we want to complete.
+Like the async function the fakeAsync function executes the code inside its body in a special fake async test zone. This intercepts and keeps track of all promises created in its body.
+The tick() function blocks execution and simulates the passage of time until all pending asynchronous activities complete.
 
 
 
