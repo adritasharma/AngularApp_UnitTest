@@ -9,11 +9,15 @@ Unit testing is a type of software testing where we test individual components o
 **Karma**: Karma is a tool of running tests on browsers it lets us spawn browsers and run jasmine tests inside of them.
 
 
-### TesSuite (describe) and Spec (it)
+### Test functions
 
-**TesSuite**: We use a **describe** to start our test block with the title matching the tested component name. `describe(string, function)` function defines what we call a **Test Suite**, a collection of individual Test Specs.
+**TesSuite  (describe)**: We use a **describe** to start our test block with the title matching the tested component name. `describe(string, function)` function defines what we call a **Test Suite**, a collection of individual Test Specs.
 
-**Spec** : It represents a test case inside the test suite. We can define spec by calling the global Jasmine function **it**, which, like `describe` takes a string and a function. `it(string, function)` function defines an individual Test Spec, this contains one or more Test Expectations
+**Spec (it)** : It represents a test case inside the test suite. We can define spec by calling the global Jasmine function **it**, which, like `describe` takes a string and a function. `it(string, function)` function defines an individual Test Spec, this contains one or more Test Expectations.
+
+**Expected outcome expect()**: expect(actual) functions take a value, called an actual. An expect function is typically used alongside a matcher function. Together they return a boolean value that depicts the passing or failing of a spec.
+
+**Matcher** : Matcher functions take a value that represents the expected value. A matcher function is chained alongside an expect function. Together they return a boolean value that depicts the passing or failing of a spec. Some examples of matchers are toBeTruthy(), toEqual(), and toContain().
 
 Example
 ```
@@ -28,6 +32,21 @@ describe("Suite Name", function() {
   }));
 });
 ```
+
+### Test Suite in Detail
+
+**Fixture** : Within the describe() function, we create a ComponentFixture of the TestComponent. ComponentFixture provides methods and properties that help test the functionality of a component.
+
+### Setup and teardown
+
+**beforeAll**: This function is called once, before all the specs in describe test suite are run.
+
+**afterAll**: This function is called once after all the specs in a test suite are finished.
+
+**beforeEach**: This function is called before each test specification, it function, has been run.
+
+**afterEach**: This function is called after each test specification has been run.
+
 ### Important terminologies
 
 **Mocking**
@@ -38,4 +57,6 @@ In short, mocking is creating objects that simulate the behavior of real objects
 **async**
 
 The purpose of the async is to let all the possible asynchronous code to finish before continuing.
+
+
 
