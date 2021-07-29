@@ -52,9 +52,15 @@ describe("Suite Name", function() {
 
 **afterAll**: This function is called once after all the specs in a test suite are finished.
 
+**afterEach**: This function is called after each test specification has been run.
+
 **beforeEach**: This function is called before each test specification, it function, has been run.
 
-**afterEach**: This function is called after each test specification has been run.
+Note: We can find 2 **beforeEach** functions one with async and one without in a component.spec file. 
+
+The first beforeEach with async is used to setup thje module and compile components. As compileComponents() is an async function returning a promise the beforeEach is marked with async. So Jasmine knows that everything has to be resolved before moving to the next step (-> here the second beforeEach). 
+
+The second beforeEach includes synchronous code only like setting up our component so it's not marked with async.
 
 ### Mocking
 
