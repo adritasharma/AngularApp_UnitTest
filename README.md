@@ -82,8 +82,33 @@ One of the essential functions of mock is, we can verify how many times a given 
 
 **Stub**
 
-A stub is an object that resembles a real object with the minimum number of methods needed for a test.
-The main functions of the is that it always returns the predefined output regardless of the input.
+A stub is an object that resembles a real object with the minimum number of methods needed for a test. Stub always returns the predefined output regardless of the input.
+To differentiate a stub from a mock, we typically only mimic the methods we are actually testing.
+
+**Eg:**
+
+.ts
+
+    clickLogout() {
+        ...
+        this.router.navigate(['/login']);
+    }
+    
+ .spec.ts
+ 
+     {
+          provide: Router,
+          useClass: class { 
+              navigate = jasmine.createSpy("navigate"); 
+          }
+     }
+     
+     it('should navigate to /login when clickLogout is fired', () => {
+       let router = fixture.debugElement.injector.get(Router);
+       component.clickLogout();
+       expect(router.navigate).toHaveBeenCalledWith(["/login"]);
+     });
+     
 
 **Spy**
 
