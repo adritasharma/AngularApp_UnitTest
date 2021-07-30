@@ -82,7 +82,7 @@ One of the essential functions of mock is, we can verify how many times a given 
 
 **Stub**
 
-Stubs are the objects that hold predefined data and uses it to give responses during tests. In other words, a stub is an object that resembles a real object with the minimum number of methods needed for a test.
+A stub is an object that resembles a real object with the minimum number of methods needed for a test.
 The main functions of the is that it always returns the predefined output regardless of the input.
 
 **Spy**
