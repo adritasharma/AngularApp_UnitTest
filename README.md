@@ -72,6 +72,25 @@ In short, mocking is creating objects that simulate the behavior of real objects
 A Spy is a feature of Jasmine which lets you take an existing class, function, or object and mock it in such a way that you can control what gets returned from function calls.
 
 
+### Mock vs. Stub vs. Spy
+
+**Mock**
+
+Mocks are the objects that store method calls.
+The main function of using mocks is that it gives full control over the behavior of the mocked objects. The mock objects are generally used for behavior verification. The term behavior means to check the correct methods and paths that are applied to the objects.
+One of the essential functions of mock is, we can verify how many times a given method is called.
+
+**Stub**
+
+Stubs are the objects that hold predefined data and uses it to give responses during tests. In other words, a stub is an object that resembles a real object with the minimum number of methods needed for a test.
+The main functions of the is that it always returns the predefined output regardless of the input.
+
+**Spy**
+
+Spies are known as partially mock objects. It means spy creates a partial object or a half dummy of the real object by stubbing or spying the real ones. In spying, the real object remains unchanged, and we just spy some specific methods of it.
+In other words, we take the existing (real) object and replace or spy only some of its methods.
+
+
 ### Testing Asynchronous Code
 
 **async** : The purpose of the async is to let all the possible asynchronous code to finish before continuing.
