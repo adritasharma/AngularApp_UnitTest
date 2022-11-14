@@ -135,5 +135,70 @@ We call tick() when there are pending asynchronous activities we want to complet
 Like the async function the fakeAsync function executes the code inside its body in a special fake async test zone. This intercepts and keeps track of all promises created in its body.
 The tick() function blocks execution and simulates the passage of time until all pending asynchronous activities complete.
 
+# Test Examples
 
+## Testing Component
+
+### Button Click
+
+### @Input
+
+### @Output
+
+    it('should listen to onDeleteClick fn', () => {
+        spyOn(component.onDelete, 'emit');
+        component.onDeleteClick();
+        fixture.detectChanges();
+
+        expect(component.onDelete.emit).toHaveBeenCalled();
+    });
+
+
+## Testing Pipe
+
+    describe('Pipe: Age', () => {
+        it('create an instance', () => {
+            let pipe = new AgePipe();
+            expect(pipe).toBeTruthy();
+        });
+
+        it('transforms Date to Time span', () => {
+            let pipe = new AgePipe();
+            let today = new Date();
+            var testDate = new Date(today.setMonth(today.getMonth() - 2));
+            expect(pipe.transform(testDate)).toBe('2 months');
+        });
+    });
+
+## Testing Service    
+
+### httpservice
+
+### BehaviourSubject
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [LoaderService]
+        });
+
+        injector = getTestBed();
+        service = injector.get(LoaderService);
+    });
+ 
+
+    it('should check loader status false by default', () => {
+        service.status$.subscribe((message) => {
+            expect(message).toBe(false);
+        })
+    })
+
+    it('should change loader status', () => {
+        service.display(true);
+
+        service.status$.subscribe((message) => {
+            expect(message).toBe(true);
+        })
+    })
+
+## Testing Interceptors  
 

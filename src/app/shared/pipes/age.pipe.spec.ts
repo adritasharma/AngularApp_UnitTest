@@ -15,5 +15,4 @@ describe('Pipe: Age', () => {
     var testDate = new Date(today.setMonth(today.getMonth() - 2));
     expect(pipe.transform(testDate)).toBe('2 months');
   });
-
 });

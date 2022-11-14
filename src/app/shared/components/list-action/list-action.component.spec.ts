@@ -27,7 +27,7 @@ describe('ListActionComponent', () => {
   });
 
 
-  it('should listen for delete icon click', () => {
+  it('should listen to onDeleteClick fn', () => {
     spyOn(component.onDelete, 'emit');
     component.onDeleteClick();
     fixture.detectChanges();
@@ -35,7 +35,7 @@ describe('ListActionComponent', () => {
     expect(component.onDelete.emit).toHaveBeenCalled();
   });
 
-  // it('should check Delete Click', fakeAsync(() => {
+  // it('should listen for delete icon click', fakeAsync(() => {
   //   spyOn(component, 'onDeleteClick');
 
   //   let button = fixture.debugElement.nativeElement.querySelector('#deleteAction');
