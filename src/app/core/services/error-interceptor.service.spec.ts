@@ -6,19 +6,21 @@ import { TestBed, inject } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { HttpErrorInterceptorService } from './error-interceptor.service';
 import { HttpService } from './http.service';
+import { NotificationService } from './notification.service';
 
 describe('Service: ErrorInterceptor', () => {
 
   let httpErrorInterceptor;
-  let loaderServiceSpy;
-  let mockHttpService
+  let mockHttpService;
   let httpHandlerSpy;
+
+  let mockNotificationService;
 
   beforeEach(() => {
     mockHttpService = jasmine.createSpyObj(['get'])
-    loaderServiceSpy = jasmine.createSpyObj('LoaderService', ['display']);
-    httpErrorInterceptor = new HttpErrorInterceptorService(loaderServiceSpy);
+    mockNotificationService = jasmine.createSpyObj('NotificationService', ['displayToastr']);
     httpHandlerSpy = jasmine.createSpyObj('HttpHandler', ['handle']);
+    httpErrorInterceptor = new HttpErrorInterceptorService(mockNotificationService);
 
     TestBed.configureTestingModule({
       providers: [
@@ -27,7 +29,8 @@ describe('Service: ErrorInterceptor', () => {
           provide: HTTP_INTERCEPTORS,
           useClass: HttpErrorInterceptorService,
           multi: true,
-        }
+        },
+        { provide: NotificationService, useValue: mockNotificationService }
       ],
       imports: [HttpClientTestingModule]
     });
@@ -38,24 +41,21 @@ describe('Service: ErrorInterceptor', () => {
   }));
   it('should handle error', () => {
 
-    const error = { status: 401, statusText: 'error' };
+    mockNotificationService.displayToastr.and.callThrough();
+    const mockErrorResponse = { status: 500, statusText: 'error', message: 'test-error' };
 
     httpHandlerSpy.handle.and.returnValue(throwError(
-      {
-        error:
-          { message: 'test-error' }
-      }
+      { error: mockErrorResponse }
     ));
 
     httpErrorInterceptor.intercept(mockHttpService, httpHandlerSpy)
       .subscribe(
-        result => console.log('good', result),
+        result => { },
         err => {
-          console.log('error', err);
           expect(err.error.message).toEqual('test-error');
+          expect(mockNotificationService.displayToastr).toHaveBeenCalled();
         }
       );
-
   })
 
   it('should pass success request', () => {

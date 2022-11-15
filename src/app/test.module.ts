@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { CoreModule } from './core/core.module';
 import { HttpErrorInterceptorService } from './core/services/error-interceptor.service';
-import { HttpAuthInterceptorService } from './core/services/http-auth-interceptor.service';
 
 @NgModule({
   declarations: [

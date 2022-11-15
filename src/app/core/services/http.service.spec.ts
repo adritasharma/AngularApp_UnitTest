@@ -27,10 +27,19 @@ describe('Service: HttpService', () => {
   }));
 
   it('should create a GET request', () => {
-    service.get(`${baseUrl}`).subscribe();
+
+    const testTitle = "Unit Test"
+
+    service.get(`${baseUrl}`).subscribe(res => {
+      expect(res).toBeTruthy;
+      expect(res.title).toBe(testTitle);
+    });
  
     const req = httpMock.expectOne(`${baseUrl}`);
+    req.flush({title:testTitle});
+
     expect(req.request.method).toBe('GET');
+
   });
 
   it('should create a POST request', () => {
@@ -61,5 +70,6 @@ describe('Service: HttpService', () => {
     const req = httpMock.expectOne(`${baseUrl}`);
     expect(req.request.method).toBe('GET');
     expect(req.request.responseType).toBe('blob');
+    req.flush(new Blob());
   });
 });

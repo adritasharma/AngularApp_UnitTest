@@ -3,27 +3,24 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LoaderService } from './loader.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpErrorInterceptorService {
 
-constructor(private loaderService: LoaderService) { }
+  constructor(private notifiy: NotificationService) { }
 
-intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  return next.handle(req)
-    .pipe(
-      tap(event => {
-
-        if (event instanceof HttpResponse) {
-          this.loaderService.display(false);
-        }
-      }, error => {
-        console.log(error);
-        this.loaderService.display(false);
-      })
-    )
-}
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req)
+      .pipe(
+        tap(event => {
+        }, error => {
+          console.log(error);
+          this.notifiy.displayToastr('error', error.message)
+        })
+      )
+  }
 
 }

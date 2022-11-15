@@ -153,6 +153,8 @@ The tick() function blocks execution and simulates the passage of time until all
         expect(component.onDelete.emit).toHaveBeenCalled();
     });
 
+## Testing Directive
+
 
 ## Testing Pipe
 
@@ -172,7 +174,47 @@ The tick() function blocks execution and simulates the passage of time until all
 
 ## Testing Service    
 
-### httpservice
+### HttpService
+
+- **Testing Request**
+
+        it('should create a POST request', () => {
+            service.post(`${baseUrl}`, {}).subscribe();
+        
+            const req = httpMock.expectOne(`${baseUrl}`);
+            expect(req.request.method).toBe('POST');
+        });
+
+- **Testing Request & Response**  
+
+We need to add the response to the request using `req.flush({});` in order to test anything within `subscribe`
+
+        it('should create a GET request', () => {
+
+            const testTitle = "Unit Test"
+
+            service.get(`${baseUrl}`).subscribe(res => {
+                expect(res).toBeTruthy;
+                expect(res.title).toBe(testTitle);
+            });
+        
+            const req = httpMock.expectOne(`${baseUrl}`);
+            req.flush({title:testTitle});
+
+            expect(req.request.method).toBe('GET');
+
+        });
+
+- **Testing File Request**
+
+        it('should create a request to get file', () => {
+            service.getFile(`${baseUrl}`).subscribe();
+        
+            const req = httpMock.expectOne(`${baseUrl}`);
+            expect(req.request.method).toBe('GET');
+            expect(req.request.responseType).toBe('blob');
+            req.flush(new Blob());
+        });
 
 ### BehaviourSubject
 
@@ -200,5 +242,79 @@ The tick() function blocks execution and simulates the passage of time until all
         })
     })
 
-## Testing Interceptors  
+## Testing Interceptors 
+
+### Arrange
+
+    beforeEach(() => {
+        mockHttpService = jasmine.createSpyObj(['get'])
+        AuthInterceptor = new AuthInterceptorService();
+
+        TestBed.configureTestingModule({
+        providers: [
+            HttpService,
+            {
+                provide: HTTP_INTERCEPTORS,
+                useClass: AuthInterceptorService,
+                multi: true,
+            }
+            ],
+            imports: [HttpClientTestingModule]
+        });
+
+        httpService = TestBed.get(HttpService);
+        httpMock = TestBed.get(HttpTestingController);
+    });
+
+
+### Auth Interceptor 
+
+    it('should add an Authorization header', () => {
+        httpService.get(baseUrl).subscribe();
+        const httpRequest = httpMock.expectOne(`${baseUrl}`);
+        expect(httpRequest.request.headers.has('Authorization')).toEqual(true);
+    });
+
+### Loader Interceptor     
+
+    mockLoaderService = jasmine.createSpyObj('LoaderService', ['display']);
+    { provide: LoaderService, useValue: mockLoaderService }
+
+
+    it('should turn on and off loader', () => {
+        mockLoaderService.display.and.callThrough();
+        httpService.get(baseUrl).subscribe(res => {
+            expect(mockLoaderService.display).toHaveBeenCalledTimes(2);
+        });
+        const req = httpMock.expectOne(`${baseUrl}`);
+        req.flush({});
+    });
+
+### Error Interceptor (Spying httpHandler)   
+
+        mockNotificationService = jasmine.createSpyObj('NotificationService', ['displayToastr']);
+        httpHandlerSpy = jasmine.createSpyObj('HttpHandler', ['handle']);
+        httpErrorInterceptor = new HttpErrorInterceptorService(mockNotificationService);
+
+        it('should handle error', () => {
+
+            mockNotificationService.displayToastr.and.callThrough();
+            const mockErrorResponse = { status: 500, statusText: 'error', message: 'test-error' };
+
+            httpHandlerSpy.handle.and.returnValue(throwError(
+            { error: mockErrorResponse }
+            ));
+
+            httpErrorInterceptor.intercept(mockHttpService, httpHandlerSpy)
+            .subscribe(
+                result => { },
+                err => {
+                    expect(err.error.message).toEqual('test-error');
+                    expect(mockNotificationService.displayToastr).toHaveBeenCalled();
+                }
+            );
+        })
+
+
+## Testing Routing   
 
